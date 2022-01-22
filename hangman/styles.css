@@ -49,3 +49,14 @@
     color: white;
     background: blue;
 }
+
+.reset-button {
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10%;
+    padding: 10px;
+    background: green;
+    color: white;
+}
