@@ -3,19 +3,28 @@ const secretWordArray = ['secret', 'god', 'carrot', 'spaghetti', 'guitar', 'base
 const keyboard = document.querySelector('.keyboard');
 const resetButton = document.querySelector('.reset-button');
 
-let secretWord;
+let secretWord;         // by declaring these variables we can use them 
 let letterByLetter;
 
-//populate the secret world field 
-// choose a random word 
 const randomWord = (keyClick) => {
     secretWord = secretWordArray[Math.floor(Math.random() * secretWordArray.length)];
-    // use the word as a string and then search the characters for the the key being clicked. 
+    // loop through the secret word.
+    for (let i = 0; i < secretWord.length; i++ ){
+        // then create a html element for each letter of the secret word
+        const letter = document.createElement('p');
+        // add the letter to the element
+        letter.append(secretWord[i]);
+        // give the element a class which will hide the letter 
+        letter.classList.add('hide');
+        // append the hidden letter to the DOM
+        word.append(letter)
+    }
 }
 
 const handleKeyClick = (e) => { 
     if (secretWord.includes(e.target.textContent)){
-        word.append(e.target.textContent);
+        // if this is true then find all the letters in the secret word that === e.target.texContent (aka the button the user pressed)
+
     }
 }
 

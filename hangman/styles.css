@@ -16,12 +16,30 @@
     height: 60%;
 }
 
-.word {
+.word-container {
     height: 20%;
+    position: relative;
+}
+
+.word {
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 50px;
+}
+
+.reset-button {
+    border: 1px solid black;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10%;
+    padding: 10px;
+    background: green;
+    color: white;
 }
 
 .keyboard {
@@ -50,13 +68,14 @@
     background: blue;
 }
 
-.reset-button {
-    border: 1px solid black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 10%;
-    padding: 10px;
-    background: green;
+.hide {
     color: white;
+    margin: 10px;
+    width: 50px;
+    padding-right: 10px;
+    border-bottom: 1px solid black;
+}
+
+.show {
+    color: black;
 }
