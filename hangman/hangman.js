@@ -3,9 +3,8 @@ const secretWordArray = ['secret', 'god', 'carrot', 'spaghetti', 'guitar', 'base
 const keyboard = document.querySelector('.keyboard');
 const resetButton = document.querySelector('.reset-button');
 
-let secretWord;         // by declaring these variables we can use them 
-let letterByLetter;
-let hiddenLetters = document.querySelectorAll('.hide');
+let secretWord;         // by declaring these variables we can use them in other functions
+let hiddenLetters;
 
 const randomWord = (keyClick) => {
     secretWord = secretWordArray[Math.floor(Math.random() * secretWordArray.length)];
@@ -19,31 +18,25 @@ const randomWord = (keyClick) => {
         letter.classList.add('hide');
         // append the hidden letter to the DOM
         word.append(letter)
-        for (let i = 0; i < hiddenLetters.length; i++){
-            console.log(hiddenLetters[i])
-        }
-
     }
+    // create a variable that holds all the elements we created (which are the hidden letters)
+    hiddenLetters = document.querySelectorAll('.hide');
+
 }
 
 // what i will need to do is use the hiddenLetters array to be able to change the class from .hide to .show and make each letter visible
 
 
 const handleKeyClick = (e) => { 
-
-    // if (secretWord.includes(e.target.textContent)){
-    //     // if this is true then find all the letters in the secret word that === e.target.texContent (aka the button the user pressed)
-    //     for(let i = 0; i < secretWord.length; i++) {
-    //         if (secretWord[i] === e.target.textContent) {
-    //             console.log(secretWord)
-    //             console.log(secretWord[i])
-    //             console.log(true)
-    //         } 
-    //     }
-    // }
+    // loop through the hiddenLetters
+    for (let i = 0; i < hiddenLetters.length; i++){
+        // check to see if the key pressed (e.target.textContent) === the textContent of each letter in the secret word
+        if (hiddenLetters[i].textContent === e.target.textContent){
+            // if this is true then change the class of the letter from .hide to .show
+            hiddenLetters[i].classList.add('show')
+        }
+    }
 }
-
-
 
 // const keys = document.querySelectorAll('.key'); // all the keys on the keyboard
 keyboard.addEventListener('click', handleKeyClick);
