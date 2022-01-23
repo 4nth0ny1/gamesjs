@@ -1,18 +1,18 @@
 const word = document.querySelector('.word');
-const secretWordArray = ['secret', 'god', 'carrot', 'spaghetti', 'guitar', 'baseball'];
+const secretWordArray = ['secret', 'god', 'carrot', 'spaghetti', 'guitar', 'baseball', 'basketball', 'rigatoni', 'nirvana', 'passive', 'tool', 'palindrome', 'tennis', 'bucatini', 'pasta'];
 const keyboard = document.querySelector('.keyboard');
 const resetButton = document.querySelector('.reset-button');
 
-let secretWord;         // by declaring these variables we can use them in other functions
-let hiddenLetters;
-let miss = 0;
+let secretWord;         // declared so we can use it in the randomWord function and the missCounter function
+let hiddenLetters;      // declared so we can use it in the randomWord function and the handleKeyClick function
+let miss = 0;           // declared so we can use it in the missCounter function and the addBodyPart function
 
-const randomWord = (keyClick) => {
+const randomWord = () => {
     secretWord = secretWordArray[Math.floor(Math.random() * secretWordArray.length)];
     // loop through the secret word.
     for (let i = 0; i < secretWord.length; i++ ){
         // then create a html element for each letter of the secret word
-        const letter = document.createElement('p');
+        letter = document.createElement('p');
         // add the letter to the element
         letter.append(secretWord[i]);
         // give the element a class which will hide the letter 
@@ -22,7 +22,6 @@ const randomWord = (keyClick) => {
     }
     // create a variable that holds all the elements we created (which are the hidden letters)
     hiddenLetters = document.querySelectorAll('.hide');
-
 }
 
 const handleKeyClick = (e) => { 
@@ -37,14 +36,17 @@ const handleKeyClick = (e) => {
 }
 
 const missCounter = (e) => {
+    // check if the secret word include the letter presses on the keyboard
     if (!secretWord.includes(e.target.textContent)) {
+        // if not, then increase the miss counter by one
         miss++;
+        // and, add a body part 
         addBodyPart()
-        console.log(miss)
     }
 }
 
 const addBodyPart = () => {
+    // based on the miss counter, add a body part starting with the head by adding a class to the html div. it will only add a body part if the counter is 1-6.
     if (miss === 1) {
         const head = document.querySelector('.head');
         head.classList.add('body-show')
@@ -63,6 +65,7 @@ const addBodyPart = () => {
     } else if (miss === 6) {
         const legTwo = document.querySelector('.leg-two');
         legTwo.classList.add('body-show')
+        resetButton.remove();
     } 
 }
 
