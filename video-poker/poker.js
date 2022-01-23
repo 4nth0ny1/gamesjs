@@ -16,6 +16,7 @@ let array = [
 ];
 
 let hand; 
+let discardButtons = [];
 
 // fisher-yates shuffle ( o(n) : time complexity ) the array, then pop the last five elements.
 const shuffle = () => {
@@ -60,17 +61,30 @@ const renderHand = () => {
         cardButton.classList.add('card-button');
         indyCardContainer.append(cardButton);
         cardContainer.append(indyCardContainer);
+        discardButtons.push(cardButton);
     }
-    console.log(`Deck after deal: ${array.length}`);
+    discardButtons.forEach(card => {
+        card.addEventListener('click', discardStatus);
+    });
+    
+}
+
+const discardStatus = (e) => {
+    e.target.classList.toggle('discard');
+    
 }
 
 const dealAgain = () => {
+    // sets variables for the parent and child of the card container
     const cardContainer = document.querySelector('.card-container');
     const childNodes = cardContainer.querySelectorAll('.individual-card');
+    // loop through the children
     for (let i = 0; i < childNodes.length; i++) {
+        // then remove the children from the parent
         cardContainer.removeChild(childNodes[i]);
     }
 
+    // reset the deck back to 52 cards
     array = [
         '2c','2d','2h','2s',
         '3c','3d','3h','3s',
@@ -86,12 +100,13 @@ const dealAgain = () => {
         'Kc','Kd','Kh','Ks',
         'Ac','Ad','Ah','As',    
     ];
-    console.log(`Deck after reset: ${array.length}`);
 }
 
 const dealButton = document.querySelector('.button');
 const reset = document.querySelector('.reset');
+
 dealButton.addEventListener('click', shuffle);
 dealButton.addEventListener('click', deal);
 dealButton.addEventListener('click', renderHand);
 reset.addEventListener('click', dealAgain);
+
