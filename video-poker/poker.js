@@ -71,13 +71,17 @@ const renderHand = () => {
 
 const discardAndDraw = (e) => {
     const cardContainer = document.querySelector('.card-container');
-    console.log(`before card gets removed: ${hand}`);
 
+    console.log(`before card gets removed: ${hand}`);
     console.log(array.length)
     console.log(array)
 
     let drawCard = array.splice(0, 1)
     console.log(drawCard)
+    hand.push(drawCard)
+    console.log(hand)
+
+    
 
     let newCard = document.createElement('div');
     newCard.textContent = drawCard; 
@@ -86,16 +90,20 @@ const discardAndDraw = (e) => {
 
     console.log(`after card gets removed: ${hand}`);
     
-
-    console.log(`after card gets removed: ${hand}`);
-
-
     // removes the card and the button from the dom, by targeting the button's previousSibling, which is the card.
     const previousSibling = e.target.previousSibling;
 
+    console.log(previousSibling.textContent)
+
+    if (hand.includes(previousSibling.textContent)) {
+        const index = hand.indexOf(previousSibling.textContent);
+        hand.splice(index, 1);
+        console.log(`after splice: ${hand}`);
+    }
+
     previousSibling.remove();
-    e.target.remove();
-    
+    e.target.remove();  
+
 }
 
 const dealAgain = () => {
