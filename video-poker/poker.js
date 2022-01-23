@@ -40,8 +40,8 @@ const shuffle = () => {
 const deal = () => {
     // declare how many cards i want to take out of the deck
     let len = 5;
-    // slice the first 5 cards from the deck and store them in a hand variable
-    hand = array.slice(0,len)
+    // splice the first 5 cards from the deck and store them in a hand variable. splice as opposed to slice will remove the cards from the deck.
+    hand = array.splice(0,len)
     return hand;
 };
 
@@ -62,7 +62,17 @@ const renderHand = () => {
     }
 }
 
+const dealAgain = () => {
+    const cardContainer = document.querySelector('.card-container');
+    const childNodes = cardContainer.querySelectorAll('.individual-card');
+    for (let i = 0; i < childNodes.length; i++) {
+        cardContainer.removeChild(childNodes[i]);
+    }
+}
+
 const dealButton = document.querySelector('.button');
+const reset = document.querySelector('.reset');
 dealButton.addEventListener('click', shuffle);
 dealButton.addEventListener('click', deal);
 dealButton.addEventListener('click', renderHand);
+reset.addEventListener('click', dealAgain);
