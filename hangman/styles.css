@@ -81,3 +81,16 @@
 .show {
     color: black;
 }
+
+.hangman {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+}
+
+.body-show {
+    color: black;
+}

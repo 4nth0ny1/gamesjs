@@ -39,10 +39,32 @@ const handleKeyClick = (e) => {
 const missCounter = (e) => {
     if (!secretWord.includes(e.target.textContent)) {
         miss++;
+        addBodyPart()
         console.log(miss)
     }
 }
 
+const addBodyPart = () => {
+    if (miss === 1) {
+        const head = document.querySelector('.head');
+        head.classList.add('body-show')
+    } else if (miss === 2) {
+        const body = document.querySelector('.body');
+        body.classList.add('body-show')
+    } else if (miss === 3) {
+        const armOne = document.querySelector('.arm-one');
+        armOne.classList.add('body-show')
+    } else if (miss === 4) {
+        const armTwo = document.querySelector('.arm-two');
+        armTwo.classList.add('body-show')
+    } else if (miss === 5) {
+        const legOne = document.querySelector('.leg-one');
+        legOne.classList.add('body-show')
+    } else if (miss === 6) {
+        const legTwo = document.querySelector('.leg-two');
+        legTwo.classList.add('body-show')
+    } 
+}
 
 keyboard.addEventListener('click', handleKeyClick);
 keyboard.addEventListener('click', missCounter);
