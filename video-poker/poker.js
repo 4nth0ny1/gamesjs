@@ -16,7 +16,7 @@ let array = [
 ];
 
 // fisher-yates shuffle ( o(n) : time complexity ) the array, then pop the last five elements.
-const shuffle = (array, e) => {
+const shuffle = () => {
     let prevElement;
     for (let i = array.length - 1; i > 0; i--) {
       let rand = Math.floor(Math.random() * (i + 1));
@@ -24,15 +24,15 @@ const shuffle = (array, e) => {
       array[i] = array[rand];
       array[rand] = prevElement;
     }
-    // return array;
-    console.log(array)
-    
+    return array;
 } 
 
-const deal = (e) => {
-    console.log('clicked')
+const deal = () => {
+    let len = 5;
+    const hand = array.slice(0,len)
+    console.log(hand)
 };
 
 const dealButton = document.querySelector('.button');
 dealButton.addEventListener('click', shuffle);
-// dealButton.addEventListener('click', deal);
+dealButton.addEventListener('click', deal);
