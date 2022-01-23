@@ -17,9 +17,10 @@ Winning hands
 20 pts: 3 of a kind 
 30 pts: Straight
 50 pts: Flush 
-75 pts: Straight Flush 
-100 pts: 4 of a kind 
-150 pts: Royal Flush 
+75 pts: Full House
+100 pts: Straight Flush 
+150 pts: 4 of a kind 
+250 pts: Royal Flush 
 
 The pts are awarded to the bank and the player can deal again.
 

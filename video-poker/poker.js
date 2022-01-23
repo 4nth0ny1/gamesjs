@@ -64,14 +64,35 @@ const renderHand = () => {
         discardButtons.push(cardButton);
     }
     discardButtons.forEach(card => {
-        card.addEventListener('click', discardStatus);
+        card.addEventListener('click', discardAndDraw);
     });
     
 }
 
-const discardStatus = (e) => {
+const discardAndDraw = (e) => {
     const cardContainer = document.querySelector('.card-container');
+    console.log(`before card gets removed: ${hand}`);
+
+    console.log(array.length)
+    console.log(array)
+
+    let drawCard = array.splice(0, 1)
+    console.log(drawCard)
+
+    let newCard = document.createElement('div');
+    newCard.textContent = drawCard; 
+    newCard.classList.add('card');
+    cardContainer.append(newCard)
+
+    console.log(`after card gets removed: ${hand}`);
+    
+
+    console.log(`after card gets removed: ${hand}`);
+
+
+    // removes the card and the button from the dom, by targeting the button's previousSibling, which is the card.
     const previousSibling = e.target.previousSibling;
+
     previousSibling.remove();
     e.target.remove();
     
