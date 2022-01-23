@@ -70,7 +70,10 @@ const renderHand = () => {
 }
 
 const discardStatus = (e) => {
-    e.target.classList.toggle('discard');
+    const cardContainer = document.querySelector('.card-container');
+    const previousSibling = e.target.previousSibling;
+    previousSibling.remove();
+    e.target.remove();
     
 }
 
