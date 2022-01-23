@@ -48,17 +48,19 @@ const deal = () => {
 const renderHand = () => {
     const cardContainer = document.querySelector('.card-container');
     for (let i = 0; i < hand.length; i++) {
+        const indyCardContainer = document.createElement('div');
         const newCard = document.createElement('div');
+        const cardButton = document.createElement('div');
+        indyCardContainer.classList.add('individual-card');
         newCard.textContent = hand[i];
         newCard.classList.add('card');
-        cardContainer.append(newCard);
-        const cardButton = document.createElement('div');
+        indyCardContainer.append(newCard);
         cardButton.textContent = 'discard';
         cardButton.classList.add('card-button');
-        cardContainer.append(cardButton);
+        indyCardContainer.append(cardButton);
+        cardContainer.append(indyCardContainer);
     }
 }
-
 
 const dealButton = document.querySelector('.button');
 dealButton.addEventListener('click', shuffle);
