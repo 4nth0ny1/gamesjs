@@ -144,7 +144,6 @@ const pointCounter = () => {
 }
 
 const handAnalyzer = (handArray) => {
-    console.log(`149: ${handArray}`);
     duplicateChecker(handArray);
     checkFlush(handArray);
 
@@ -156,7 +155,6 @@ const checkFlush = (arr) => {
         const last = arr[i].charAt(arr[i].length - 1);
         suits.push(last)
     }
-    console.log(suits)
     if (allEqual(suits)) {
         console.log('you have a flush')
     };
@@ -172,8 +170,6 @@ const duplicateChecker = (hArray) => {
         firstValArray.push(suitRemoved);
     }
 
-    console.log(`158: ${firstValArray}`);
-
     for (let i = 0; i < firstValArray.length; i++) {
         for (let j = 0; j < firstValArray.length; j++) {
             if (i !== j) {
@@ -184,13 +180,11 @@ const duplicateChecker = (hArray) => {
         }
     }
  
-    console.log(`duplicates: ${duplicates}`);
-
     if (duplicates.length === 2) {
         console.log('pair')
     }
 
-    // this did not work
+    // this actually was fixed by going with the error on line 204. since it's doubled in the duplicate array and 3 of a kind is the only one that produces that response then making it equal to 6 allows it to work. 
     if (duplicates.length === 3) {
         console.log('3 of a kind')
     }
@@ -205,6 +199,10 @@ const duplicateChecker = (hArray) => {
 
     if (duplicates.length === 5) {
         console.log('full house')
+    }
+
+    if (duplicates.length === 6) {
+        console.log('3 of a kind')
     }
 }
 
