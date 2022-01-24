@@ -146,9 +146,21 @@ const pointCounter = () => {
 const handAnalyzer = (handArray) => {
     console.log(`149: ${handArray}`);
     duplicateChecker(handArray);
+    checkFlush(handArray);
 
+}
 
-    // const message = `You have ${pointValues.key}, you will win ${pointValues.value}.`
+const checkFlush = (arr) => {
+    let suits = [];
+    for (let i = 0; i < arr.length; i++) {
+        const last = arr[i].charAt(arr[i].length - 1);
+        suits.push(last)
+    }
+    console.log(suits)
+    if (allEqual(suits)) {
+        console.log('you have a flush')
+    };
+    
 }
 
 const duplicateChecker = (hArray) => {
