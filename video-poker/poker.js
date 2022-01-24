@@ -40,10 +40,12 @@ const shuffle = () => {
 
 // create a deal function using the new shuffled array
 const deal = () => {
-    // declare how many cards i want to take out of the deck
-    let len = 5;
     // splice the first 5 cards from the deck and store them in a hand variable. splice as opposed to slice will remove the cards from the deck.
-    hand = array.splice(0,len)
+    hand = array.splice(0,5)
+    console.log(hand)
+    if (hand.length > 0) {
+        dealAgain();
+    }
     return hand;
 };
 
@@ -66,44 +68,32 @@ const renderHand = () => {
     discardButtons.forEach(card => {
         card.addEventListener('click', discardAndDraw);
     });
-    
 }
 
 const discardAndDraw = (e) => {
     const cardContainer = document.querySelector('.card-container');
-
-    console.log(`before card gets removed: ${hand}`);
-    console.log(array.length)
-    console.log(array)
+    const indyCardContainer = document.createElement('div');
 
     let drawCard = array.splice(0, 1)
-    console.log(drawCard)
-    hand.push(drawCard)
-    console.log(hand)
-
-    
+    hand.push(drawCard) 
 
     let newCard = document.createElement('div');
     newCard.textContent = drawCard; 
     newCard.classList.add('card');
-    cardContainer.append(newCard)
-
-    console.log(`after card gets removed: ${hand}`);
-    
+    indyCardContainer.classList.add('individual-card');
+    indyCardContainer.append(newCard);
+    cardContainer.append(indyCardContainer);
+   
     // removes the card and the button from the dom, by targeting the button's previousSibling, which is the card.
     const previousSibling = e.target.previousSibling;
-
-    console.log(previousSibling.textContent)
 
     if (hand.includes(previousSibling.textContent)) {
         const index = hand.indexOf(previousSibling.textContent);
         hand.splice(index, 1);
-        console.log(`after splice: ${hand}`);
     }
 
     previousSibling.remove();
     e.target.remove();  
-
 }
 
 const dealAgain = () => {
