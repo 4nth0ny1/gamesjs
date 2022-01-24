@@ -15,8 +15,21 @@ let array = [
     'Ac','Ad','Ah','As',    
 ];
 
+const pointValues = {
+    "JJ or better": 5,
+    "Two-pair": 10, 
+    "3 of a kind": 20, 
+    "Straight": 30, 
+    "Flush": 50, 
+    "Full House": 75, 
+    "4 of a kind": 100, 
+    "Straight Flush": 150, 
+    "Royal Flush": 250
+};
+
 let hand; 
 let discardButtons = [];
+let points = 1000;
 
 // fisher-yates shuffle ( o(n) : time complexity ) the array, then pop the last five elements.
 const shuffle = () => {
@@ -42,10 +55,11 @@ const shuffle = () => {
 const deal = () => {
     // splice the first 5 cards from the deck and store them in a hand variable. splice as opposed to slice will remove the cards from the deck.
     hand = array.splice(0,5)
-    console.log(hand)
     if (hand.length > 0) {
         dealAgain();
     }
+    points -= 10;
+    handAnalyzer(hand);
     return hand;
 };
 
@@ -124,11 +138,21 @@ const dealAgain = () => {
     ];
 }
 
+const pointCounter = () => {
+    const pointTotal = document.querySelector('.point-total');
+    pointTotal.textContent = `Points: ${points}`;
+}
+
+const handAnalyzer = (handArray) => {
+    console.log(handArray);
+}
+
 const dealButton = document.querySelector('.button');
 const reset = document.querySelector('.reset');
 
 dealButton.addEventListener('click', shuffle);
 dealButton.addEventListener('click', deal);
 dealButton.addEventListener('click', renderHand);
+dealButton.addEventListener('click', pointCounter);
 reset.addEventListener('click', dealAgain);
 
