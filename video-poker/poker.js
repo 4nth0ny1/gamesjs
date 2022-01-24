@@ -55,9 +55,9 @@ const shuffle = () => {
 const deal = () => {
     // splice the first 5 cards from the deck and store them in a hand variable. splice as opposed to slice will remove the cards from the deck.
     hand = array.splice(0,5)
-    if (hand.length > 0) {
-        dealAgain();
-    }
+    // if (hand.length > 0) {
+    //     dealAgain();
+    // }
     points -= 10;
     handAnalyzer(hand);
     return hand;
@@ -87,7 +87,7 @@ const renderHand = () => {
 const discardAndDraw = (e) => {
     const cardContainer = document.querySelector('.card-container');
     const indyCardContainer = document.createElement('div');
-
+    
     let drawCard = array.splice(0, 1)
     hand.push(drawCard) 
 
@@ -100,14 +100,14 @@ const discardAndDraw = (e) => {
    
     // removes the card and the button from the dom, by targeting the button's previousSibling, which is the card.
     const previousSibling = e.target.previousSibling;
-
     if (hand.includes(previousSibling.textContent)) {
         const index = hand.indexOf(previousSibling.textContent);
         hand.splice(index, 1);
     }
-
     previousSibling.remove();
     e.target.remove();  
+
+    handAnalyzer(hand.flat());
 }
 
 const dealAgain = () => {
@@ -144,8 +144,59 @@ const pointCounter = () => {
 }
 
 const handAnalyzer = (handArray) => {
-    console.log(handArray);
+    console.log(`149: ${handArray}`);
+    duplicateChecker(handArray);
+
+
+    // const message = `You have ${pointValues.key}, you will win ${pointValues.value}.`
 }
+
+const duplicateChecker = (hArray) => {
+    let duplicates = [];
+    let firstValArray = [];
+
+    for (let i = 0; i < hArray.length; i++) {
+        const suitRemoved = hArray[i].slice(0, -1);
+        firstValArray.push(suitRemoved);
+    }
+
+    console.log(`158: ${firstValArray}`);
+
+    for (let i = 0; i < firstValArray.length; i++) {
+        for (let j = 0; j < firstValArray.length; j++) {
+            if (i !== j) {
+                if (firstValArray[i] === firstValArray[j]) {
+                    duplicates.push(firstValArray[i])
+                }
+            }
+        }
+    }
+ 
+    console.log(`duplicates: ${duplicates}`);
+
+    if (duplicates.length === 2) {
+        console.log('pair')
+    }
+
+    // this did not work
+    if (duplicates.length === 3) {
+        console.log('3 of a kind')
+    }
+
+    if (duplicates.length === 4) {
+        if (allEqual(duplicates)){
+            console.log('4 of a kind')
+        } else {
+            console.log('two pair')
+        };
+    }
+
+    if (duplicates.length === 5) {
+        console.log('full house')
+    }
+}
+
+const allEqual = arr => arr.every(val => val === arr[0]);
 
 const dealButton = document.querySelector('.button');
 const reset = document.querySelector('.reset');
@@ -153,6 +204,6 @@ const reset = document.querySelector('.reset');
 dealButton.addEventListener('click', shuffle);
 dealButton.addEventListener('click', deal);
 dealButton.addEventListener('click', renderHand);
-dealButton.addEventListener('click', pointCounter);
+// dealButton.addEventListener('click', pointCounter);
 reset.addEventListener('click', dealAgain);
 
